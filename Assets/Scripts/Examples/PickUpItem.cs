@@ -1,48 +1,56 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿namespace PrisonBreak.Scripts.Example
+{
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-public class PickUpItem : MonoBehaviour, IInteractable {
+    public class PickUpItem : MonoBehaviour, IInteractable
+    {
 
-	public enum ItemType {accessItem, bonusItem};
+        public enum ItemType { accessItem, bonusItem };
 
-	public ItemType itemType;
-	public string name;
-	public int weight;
-	public int doorId;
-	public int bonusPoints;
+        public ItemType itemType;
+        public string name;
+        public int weight;
+        public int doorId;
+        public int bonusPoints;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        // Use this for initialization
+        void Start()
+        {
 
-	private Item createItem(){
+        }
 
-		Item it = null;
+        // Update is called once per frame
+        void Update()
+        {
 
-		switch(itemType)
-		{
-		case ItemType.accessItem:
-			it = new AccessItem(name, weight, doorId);
-			break;
-		case ItemType.bonusItem:
-			it = new BonusItem(name, weight, bonusPoints);
-			break;
-		}
+        }
 
-		return it;
-	}
+        private Item createItem()
+        {
 
-	public void Interact(){
-		if(InventoryManager.instance.AddItem(createItem()))
-		{
-			Destroy(gameObject);
-		}
-	}
+            Item it = null;
+
+            switch (itemType)
+            {
+                case ItemType.accessItem:
+                    it = new AccessItem(name, weight, doorId);
+                    break;
+                case ItemType.bonusItem:
+                    it = new BonusItem(name, weight, bonusPoints);
+                    break;
+            }
+
+            return it;
+        }
+
+        public void Interact()
+        {
+            if (InventoryManager.instance.AddItem(createItem()))
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
 }
