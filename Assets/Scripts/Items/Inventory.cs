@@ -6,6 +6,6 @@
     public class Inventory : MonoBehaviour
     {
         [SerializeField]
-        private List<Item> _invenoryItems;
+        private List<Item> _invenoryItems = new List<Item>();
     }
 }
