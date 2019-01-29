@@ -27,7 +27,7 @@
         [Serializable]
         class JsonResponse
         {
-            public string type;
+            public string type = null;
             public JsonJoke value;
 
             public JsonResponse()

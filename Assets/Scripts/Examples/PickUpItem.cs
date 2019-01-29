@@ -10,7 +10,7 @@
         public enum ItemType { accessItem, bonusItem };
 
         public ItemType itemType;
-        public string name;
+        public new string name;
         public int weight;
         public int doorId;
         public int bonusPoints;
