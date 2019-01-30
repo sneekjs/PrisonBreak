@@ -5,6 +5,11 @@
 
     public class BonusItem : Item
     {
-        
+        private float points;
+
+        public BonusItem(string name, float weight, float points) : base(name, weight)
+        {
+            this.points = points;
+        }
     }
 }
