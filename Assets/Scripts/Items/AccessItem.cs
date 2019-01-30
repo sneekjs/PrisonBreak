@@ -6,7 +6,13 @@
 
         public AccessItem(string name, float weight, int door) : base(name, weight)
         {
-            this.door = door;
+            this.Door = door;
+        }
+
+        public int Door
+        {
+            get{return door;}
+            private set{door = value;}
         }
     }
 }

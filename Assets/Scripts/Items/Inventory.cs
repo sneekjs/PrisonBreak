@@ -51,6 +51,22 @@
             }
         }
 
+        public bool HasKey(int id)
+        {
+            for (int i = 0; i < _invenoryItems.Count; i++)
+            {
+                if (_invenoryItems[i] is AccessItem)
+                {
+                    AccessItem it = (AccessItem)_invenoryItems[i];
+                    if (it.Door == id)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         public void PrintToConsole()
         {
             foreach (var i in _invenoryItems)
