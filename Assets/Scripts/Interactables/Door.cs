@@ -6,6 +6,7 @@
     using System.Collections.Generic;
     using UnityEngine;
 
+    [RequireComponent(typeof (HingeJoint))]
     public class Door : MonoBehaviour, IInteractable
     {
         [SerializeField]
@@ -14,15 +15,16 @@
         [SerializeField]
         private bool _open = false;
 
+        [SerializeField]
+        private Vector3 _openRotation;
+        
+        private bool _isUnlocked = false;
+
         private void Update()                                                                                           //maak een var voor open en dicht rotation
         {
-            if (_open && transform.rotation.eulerAngles.y > 0)
+            if (_open)
             {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 0), 1);
-            }
-            else if (!_open && transform.rotation.eulerAngles.y < 90)
-            {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 90, 0), 1);
+                gameObject.GetComponent<HingeJoint>().axis = _openRotation;
             }
         }
 

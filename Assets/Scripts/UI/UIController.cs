@@ -1,5 +1,6 @@
 ﻿namespace PrisonBreak.Scripts.UI
 {
+    using PrisonBreak.Scripts.Interactables;
     using PrisonBreak.Scripts.Items;
     using System.Collections;
     using System.Collections.Generic;
@@ -18,6 +19,9 @@
         private Text _weightInfo;
 
         [SerializeField]
+        private Dictionary<string, PickUp> _gameObjectsInInventory = new Dictionary<string, PickUp>();
+
+        [SerializeField]
         private List<InventorySlot> _inventorySlots = new List<InventorySlot>();
 
         private bool _inventoryIsOpen = false;
@@ -25,6 +29,27 @@
         private int _selectedIndex;
 
         private List<Item> _inventoryItems = new List<Item>();
+
+        public static UIController Instance;
+
+        public Dictionary<string, PickUp> GameObjectsInInventory
+        {
+            get { return _gameObjectsInInventory; }
+            set { _gameObjectsInInventory = value; }
+        }
+
+        void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
 
         private void Start()
         {
@@ -54,7 +79,10 @@
             if (_inventory.InvenoryItems.Contains(item))
             {
                 _inventory.RemoveItem(item);
-                UpdateVisualInventory();               
+                UpdateVisualInventory();
+                PickUp pickUp = GameObjectsInInventory[item.Name];
+                pickUp.transform.position = Camera.main.transform.position + new Vector3(0, 0, 0.2f);
+                pickUp.gameObject.SetActive(true);
             }
         }
 

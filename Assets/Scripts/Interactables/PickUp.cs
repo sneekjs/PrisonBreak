@@ -2,6 +2,7 @@
 {
     using PrisonBreak.Scripts.Interfaces;
     using PrisonBreak.Scripts.Items;
+    using PrisonBreak.Scripts.UI;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
@@ -24,6 +25,11 @@
         {
             get{return _name;}
             set{_name = value;}
+        }
+
+        private void Start()
+        {
+            UIController.Instance.GameObjectsInInventory.Add(_name, this);
         }
 
         public virtual void Action()

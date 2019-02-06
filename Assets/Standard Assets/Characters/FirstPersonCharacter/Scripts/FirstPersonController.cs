@@ -94,6 +94,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void FixedUpdate()
         {
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                m_CharacterController.height = 0.5f;
+            }
+            else if(Input.GetKeyUp(KeyCode.LeftControl))
+            {
+                m_CharacterController.height = 2.8f;
+            }
+
             float speed;
             GetInput(out speed);
             // always move along the camera forward as it is the direction that it being aimed at
