@@ -1,4 +1,5 @@
 ﻿namespace PrisonBreak.Scripts.Items {
+    using PrisonBreak.Scripts.UI;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
@@ -14,7 +15,28 @@
         [SerializeField]
         private float _maxWeight = 10f;
 
+        [SerializeField]
+        private UIController _uIController;
+
         public static Inventory Instance;
+
+        public List<Item> InvenoryItems
+        {
+            get { return _invenoryItems; }
+            set { _invenoryItems = value; }
+        }
+
+        public float TotalWeight
+        {
+            get { return _totalWeight; }
+            set { _totalWeight = value; }
+        }
+
+        public float MaxWeight
+        {
+            get { return _maxWeight; }
+            set { _maxWeight = value; }
+        }
 
         void Awake()
         {
@@ -31,33 +53,34 @@
 
         public bool AddItem(Item item)
         {
-            if (_totalWeight + item.Weight > _maxWeight)
+            if (TotalWeight + item.Weight > MaxWeight)
             {
                 return false;
             }
             else
             {
-                _invenoryItems.Add(item);
-                _totalWeight += item.Weight;
+                InvenoryItems.Add(item);
+                TotalWeight += item.Weight;
+                _uIController.AddItemToInventory(item);
                 return true;
             }
         }
 
         public void RemoveItem(Item item)
         {
-            if (_invenoryItems.Remove(item))
+            if (InvenoryItems.Remove(item))
             {
-                _totalWeight -= item.Weight;
+                TotalWeight -= item.Weight;
             }
         }
 
         public bool HasKey(int id)
         {
-            for (int i = 0; i < _invenoryItems.Count; i++)
+            for (int i = 0; i < InvenoryItems.Count; i++)
             {
-                if (_invenoryItems[i] is AccessItem)
+                if (InvenoryItems[i] is AccessItem)
                 {
-                    AccessItem it = (AccessItem)_invenoryItems[i];
+                    AccessItem it = (AccessItem)InvenoryItems[i];
                     if (it.Door == id)
                     {
                         return true;
@@ -69,7 +92,7 @@
 
         public void PrintToConsole()
         {
-            foreach (var i in _invenoryItems)
+            foreach (var i in InvenoryItems)
             {
                 Debug.Log(i.Name + " and " + i.Weight);
             }
