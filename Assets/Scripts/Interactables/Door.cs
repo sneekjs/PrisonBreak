@@ -25,6 +25,7 @@
             if (_open)
             {
                 gameObject.GetComponent<HingeJoint>().axis = _openRotation;
+                gameObject.GetComponent<Rigidbody>().isKinematic = false;
             }
         }
 
