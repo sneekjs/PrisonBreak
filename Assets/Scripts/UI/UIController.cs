@@ -81,7 +81,7 @@
                 _inventory.RemoveItem(item);
                 UpdateVisualInventory();
                 PickUp pickUp = GameObjectsInInventory[item.Name];
-                pickUp.transform.position = Camera.main.transform.position + new Vector3(0, 0, 0.2f);
+                pickUp.transform.position = Camera.main.transform.position;
                 pickUp.gameObject.SetActive(true);
             }
         }

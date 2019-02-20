@@ -41,5 +41,10 @@
         {
             Open();
         }
+
+        public void OpenSpecialDoor()
+        {
+            _open = true;
+        }
     }
 }

@@ -100,6 +100,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             else if(Input.GetKeyUp(KeyCode.LeftControl))
             {
+                m_CharacterController.height = 1.8f;
+            }
+            else if (Input.GetKeyDown(KeyCode.C))
+            {
+                m_CharacterController.height = 0.01f;
+            }
+            else if (Input.GetKeyUp(KeyCode.C))
+            {
                 m_CharacterController.height = 2.8f;
             }
 

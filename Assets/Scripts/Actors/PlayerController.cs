@@ -4,6 +4,8 @@
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
+    using UnityEngine.UI;
+    using UnityStandardAssets.Characters.FirstPerson;
 
     public class PlayerController : MonoBehaviour
     {
@@ -12,6 +14,10 @@
 
         [SerializeField]
         private Transform _playerHead;
+
+        private InputField _selectedInputField;
+
+        private bool _isTyping;
 
         private void Update()
         {
@@ -33,6 +39,12 @@
                 if (i != null)
                 {
                     i.Action();
+                }
+                else if (hit.collider.CompareTag("InputField"))
+                {
+                    _selectedInputField = hit.collider.gameObject.GetComponent<InputField>();
+                    _selectedInputField.ActivateInputField();
+                    GetComponent<FirstPersonController>().enabled = false;
                 }
             }
         }
