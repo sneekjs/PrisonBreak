@@ -7,11 +7,8 @@
     using UnityEngine;
 
     [RequireComponent(typeof (HingeJoint))]
-    public class Door : MonoBehaviour, IInteractable
+    public class Door : InteractionObject, IInteractable
     {
-        [SerializeField]
-        private int _id;
-
         [SerializeField]
         private bool _open = false;
 
