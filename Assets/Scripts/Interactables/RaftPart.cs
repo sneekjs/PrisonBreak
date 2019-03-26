@@ -15,6 +15,9 @@
         [SerializeField]
         private UIController _uIController;
 
+        [SerializeField]
+        private GameObject _spotlightHint;
+
         public void Action()
         {
             CheckObject();
@@ -49,6 +52,8 @@
             pickup.gameObject.transform.localRotation = Quaternion.identity;
             Destroy(pickup.gameObject.GetComponent<Rigidbody>());
             Destroy(pickup.gameObject.GetComponent<Access>());
+            _spotlightHint.SetActive(false);
+            Raft.Instance.PartCompleted();
         }
     }
 }
