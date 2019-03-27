@@ -22,6 +22,19 @@ public class Raft : MonoBehaviour
         _anime = GetComponent<Animator>();
     }
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void PartCompleted()
     {
         _completedParts++;
