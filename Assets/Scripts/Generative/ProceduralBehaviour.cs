@@ -9,16 +9,14 @@ public class ProceduralBehaviour : MonoBehaviour
     public float perlinSeed;
 
     [Header("World Gen Settings")]
-    public int seed;
     public int worldSize;
     public float maxWorldHeight;
-
-    public GameObject module;
     public Terrain t;
+    public List<HeightPass> passes = new List<HeightPass>();
 
+    private int seed;
     private ProceduralTerrain pt;
 
-    public List<HeightPass> passes = new List<HeightPass>();
 
     void Awake()
     {
@@ -35,6 +33,7 @@ public class ProceduralBehaviour : MonoBehaviour
 
     void Start()
     {
+        seed = Random.Range(0, int.MaxValue);
         perlinSeed = Random.Range(0.0f, 1000000f);
         pt = new ProceduralTerrain(worldSize, worldSize, passes);
         t.terrainData.heightmapResolution = worldSize;
@@ -42,26 +41,11 @@ public class ProceduralBehaviour : MonoBehaviour
         Generate();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            Generate();
-        }
-    }
-
     public void Generate()
     {
         SetSeed(seed);
-
-        foreach (var obj in GameObject.FindGameObjectsWithTag("Procedural"))
-        {
-            Destroy(obj);
-        }
-
         pt.Generate();
         t.terrainData.SetHeights(0, 0, pt.GetNormalizedHeights());
-
     }
 
     public void SetSeed(int s)

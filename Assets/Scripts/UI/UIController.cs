@@ -28,8 +28,6 @@
 
         private int _selectedIndex;
 
-        private List<Item> _inventoryItems = new List<Item>();
-
         public static UIController Instance;
 
         public Dictionary<string, PickUp> GameObjectsInInventory

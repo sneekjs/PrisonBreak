@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Raft : MonoBehaviour
 {
@@ -21,19 +22,6 @@ public class Raft : MonoBehaviour
         _anime = GetComponent<Animator>();
     }
 
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
     public void PartCompleted()
     {
         _completedParts++;
@@ -52,6 +40,21 @@ public class Raft : MonoBehaviour
     {
         _fpsController.SetActive(false);
         _anime.Play("Finish");
-        Debug.Log("Victory");
+        SwitchScene();
+    }
+
+    public void SwitchScene()
+    {
+        StartCoroutine(LoadNewScene());
+    }
+
+    public IEnumerator LoadNewScene()
+    {
+        AsyncOperation async = SceneManager.LoadSceneAsync("GameOverScene");
+        while (!async.isDone)
+        {
+            yield return null;
+        }
+
     }
 }

@@ -25,7 +25,13 @@
             {
                 Interact();
             }
+
             Debug.DrawRay(_playerHead.position, _playerHead.forward, Color.green);
+
+            if (transform.position.y < -20)
+            {
+                Raft.Instance.SwitchScene();
+            }
         }
 
         private void Interact()

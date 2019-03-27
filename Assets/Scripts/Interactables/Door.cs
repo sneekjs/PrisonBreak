@@ -14,8 +14,6 @@
 
         [SerializeField]
         private Vector3 _openRotation;
-        
-        private bool _isUnlocked = false;
 
         private void Update()                                                                                           //maak een var voor open en dicht rotation
         {
