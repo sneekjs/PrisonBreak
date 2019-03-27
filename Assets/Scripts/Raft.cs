@@ -7,6 +7,8 @@ public class Raft : MonoBehaviour
 {
     public static Raft Instance;
 
+    public bool _gameFinished;
+
     [SerializeField]
     private int _requiredParts = 4;
 
@@ -35,6 +37,15 @@ public class Raft : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (_gameFinished)
+        {
+            SwitchScene();
+            _gameFinished = false;
+        }
+    }
+
     public void PartCompleted()
     {
         _completedParts++;
@@ -53,7 +64,6 @@ public class Raft : MonoBehaviour
     {
         _fpsController.SetActive(false);
         _anime.Play("Finish");
-        SwitchScene();
     }
 
     public void SwitchScene()
