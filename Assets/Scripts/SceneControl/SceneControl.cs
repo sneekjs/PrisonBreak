@@ -6,7 +6,7 @@
     {
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.K))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 Application.Quit();
             }
